@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
@@ -11,20 +12,20 @@ const MenuWrapper = styled.div<{ activated: boolean }>`
   justify-content: center;
   align-items: center;
   height: auto;
-  background-color: antiquewhite;
 `;
 
 const MenuContainer = styled.div`
   width: 200px;
   height: 80px;
-  background-color: green;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 const HiddenContainer = styled.div<{ activated: boolean }>`
-  background-color: azure;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.8);
   display: ${(props) => (props.activated ? 'flex' : 'none')};
   position: absolute;
   width: 100%;
@@ -32,6 +33,8 @@ const HiddenContainer = styled.div<{ activated: boolean }>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
+  color: ${(props) => props.theme.fontColor.dark};
 `;
 const HiddenContainerItem = styled.div`
   display: flex;
@@ -39,11 +42,18 @@ const HiddenContainerItem = styled.div`
   justify-content: center;
   align-items: center;
   height: 80px;
+  width: 100%;
+  border-bottom: 0.2px solid rgba(255, 255, 255, 0.5);
+  :last-child {
+    border: none;
+  }
 `;
 type HeaderMenuProps = {
-  menus: string[];
+  menus: { text: string; url: string }[];
+  subMenus: { text: string; url: string }[][];
 };
-const HeaderMenu = ({ menus }: HeaderMenuProps) => {
+const HeaderMenu = ({ menus, subMenus }: HeaderMenuProps) => {
+  const router = useRouter();
   const [activatedMenu, setActivatedMenu] = useRecoilState(activatedMenuAtom);
   return (
     <>
@@ -62,11 +72,28 @@ const HeaderMenu = ({ menus }: HeaderMenuProps) => {
             setActivatedMenu(-1);
           }}
         >
-          <MenuContainer>{menu}</MenuContainer>
+          <MenuContainer
+            tabIndex={0}
+            onKeyPress={() => router.push(menu.url)}
+            onClick={() => {
+              router.push(menu.url);
+            }}
+          >
+            {menu.text}
+          </MenuContainer>
           <HiddenContainer activated={activatedMenu === idx}>
-            <HiddenContainerItem>{idx}-1</HiddenContainerItem>
-            <HiddenContainerItem>{idx}-2</HiddenContainerItem>
-            <HiddenContainerItem>{idx}-3</HiddenContainerItem>
+            {subMenus[idx].map((subMenu) => (
+              <HiddenContainerItem
+                tabIndex={0}
+                onKeyPress={() => router.push(subMenu.url)}
+                onClick={() => {
+                  router.push(subMenu.url);
+                }}
+                key={subMenu.text}
+              >
+                {subMenu.text}
+              </HiddenContainerItem>
+            ))}
           </HiddenContainer>
         </MenuWrapper>
       ))}

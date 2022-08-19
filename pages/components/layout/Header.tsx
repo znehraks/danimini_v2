@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -13,10 +14,11 @@ const Wrapper = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  padding: 0 300px;
+  padding: 0 400px;
 `;
 
 const LogoContainer = styled.div`
+  cursor: pointer;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -26,15 +28,36 @@ const LogoContainer = styled.div`
     height: 80%;
   }
 `;
-const menus = ['메뉴1', '메뉴2', '메뉴3', '메뉴4'];
-
+const menus = [
+  { text: 'GOAL', url: '/goal' },
+  { text: 'RANKING', url: '/ranking' },
+  { text: 'MYPAGE', url: '/mypage' },
+  { text: 'EXPERIMENTAL', url: '/experimental' },
+];
+const subMenus = [
+  [{ text: '내 목표 보기', url: '/goal' }],
+  [
+    { text: '실시간랭킹', url: '/ranking/realtime' },
+    { text: '종합랭킹', url: '/ranking/total' },
+  ],
+  [
+    { text: '내 점수 보기', url: '/score/my' },
+    { text: '내 정보 수정', url: '/mypage' },
+  ],
+  [{ text: '실험실 기능', url: '/experimental' }],
+];
 const Header = () => {
+  const router = useRouter();
   return (
     <Wrapper>
-      <LogoContainer>
+      <LogoContainer
+        onClick={() => {
+          router.push('/');
+        }}
+      >
         <img src={LogoImg.src} alt='로고 이미지' />
       </LogoContainer>
-      <HeaderMenu menus={menus} />
+      <HeaderMenu menus={menus} subMenus={subMenus} />
     </Wrapper>
   );
 };

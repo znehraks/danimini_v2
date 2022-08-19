@@ -6,12 +6,13 @@ import Header from './Header';
 
 const Wrapper = styled.div`
   width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
   background-color: ${(props) => props.theme.backgroundColor.dark};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  padding: 0 400px;
 `;
 
 type MainLayoutProps = {

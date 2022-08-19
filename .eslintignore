@@ -1,0 +1,11 @@
+node_modules/
+.next/
+next.config.js
+public/
+!public/**/*.ts
+.eslintrc.json
+.gitignore
+.prettierrc
+.prettierrcignore
+Dockerfile
+next-env.d.ts

@@ -1,0 +1,63 @@
+{
+    "users": [
+        {
+              "uuid": 1,
+              "user_name":"jm",
+              "user_id": "jay",
+              "user_password": "101010",
+              "created_at": "2022-08-15",
+              "group_id": 1
+        },
+        {
+              "uuid": 2,
+              "user_name":"am",
+              "user_id": "aay",
+              "user_password": "101010",
+              "created_at": "2022-08-15",
+              "group_id": 1
+        },
+        {
+              "uuid": 3,
+              "user_name":"km",
+              "user_id": "kay",
+              "user_password": "101010",
+              "created_at": "2022-08-15",
+              "group_id": 2
+        }
+    ],
+    "groups": [
+        {
+            "uuid": 1,
+            "group_name":"group_1",
+            "created_at": "2022-08-15"
+        },
+        {
+            "uuid": 2,
+            "group_name":"group_2",
+            "created_at": "2022-08-15"
+        }
+    ],
+    "tasks": [
+        {
+            "uuid": 1,
+            "task_user_uuid":1,
+            "task_title":"Jm's task 1",
+            "task_content": "Jm's task content 1",
+            "task_created_at": "2022-08-01",
+            "task_finish_at": "2022-08-15",
+            "task_period": "week",
+            "task_score": 50
+        },
+        {
+            "uuid": 2,
+            "task_user_uuid":1,
+            "task_title":"Jm's task 2",
+            "task_content": "Jm's task content 2",
+            "task_created_at": "2022-08-01",
+            "task_finish_at": "2022-08-15",
+            "task_period": "week",
+            "task_score": 50
+        }
+    ]
+  }
+  
